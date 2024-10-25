@@ -33,6 +33,7 @@ export class DataService implements InMemoryDbService {
           price: 30,
         },
       ],
+      customer: []
     };
   }
 }
