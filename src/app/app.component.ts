@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MasterService } from './service/master.service';
 import { ProductModel } from './model/product.model';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,8 @@ import { ProductModel } from './model/product.model';
 })
 export class AppComponent implements OnInit {
   productList!: ProductModel[];
+  dataSource: any;
+  displayedColumns: string[]=['id', 'name', 'description', 'price']
 
   constructor(private service: MasterService) {
 
@@ -21,8 +24,7 @@ export class AppComponent implements OnInit {
   loadProductList() {
     this.service.getAll().subscribe(item => {
       this.productList = item;
-
-      console.log(this.productList);
+      this.dataSource = new MatTableDataSource(this.productList);
     });
   }
 }
